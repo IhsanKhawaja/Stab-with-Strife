@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://ckktscuw4kaju"]
+
+[ext_resource type="Script" uid="uid://do1vsxof5w8fh" path="res://Scripts/Terrain/c_room.gd" id="1_5nr07"]
+
+[node name="Room" type="Node3D" unique_id=849317413]
+script = ExtResource("1_5nr07")
