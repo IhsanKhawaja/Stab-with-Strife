@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://vfmr4epa5odv"]
 
 [ext_resource type="Script" uid="uid://yfg1e2klklcl" path="res://Scripts/Terrain/castle_world.gd" id="1_hwwkj"]
+[ext_resource type="PackedScene" uid="uid://ckktscuw4kaju" path="res://Scenes/Terrain/CRoom.tscn" id="2_sw00d"]
 
 [node name="World" type="Node3D" unique_id=2039810402]
 script = ExtResource("1_hwwkj")
+room = ExtResource("2_sw00d")

@@ -12,6 +12,12 @@ func _ready() -> void:
 		seed = rng.seed
 	else:
 		rng.seed = seed
+	
+	generate()
 
 func generate():
-	pass
+	for i in roomCount:
+		var newRoom := room.instantiate()
+		add_child(newRoom)
+		newRoom.seed = seed
+		newRoom.generate()
