@@ -1,0 +1,142 @@
+[gd_scene format=3 uid="uid://djxhvfawymqq6"]
+
+[ext_resource type="Script" uid="uid://0rf3vjsunv78" path="res://Scripts/character_movement.gd" id="1_e13mc"]
+[ext_resource type="Script" uid="uid://hp8l131sn1vg" path="res://Scripts/stamina.gd" id="2_q0huo"]
+[ext_resource type="Script" uid="uid://b0okhahyrdsd" path="res://Scripts/ui.gd" id="3_oirxf"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_g5c48"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_eqmd6"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fwu20"]
+size = Vector3(1, 1, 0.9970703)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xcj4c"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_h0f5h"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_eqmd6"]
+
+[node name="Node3D" type="Node3D" unique_id=566379481]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1286537021]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9904728, -0.5357454, -0.004817009)
+use_collision = true
+size = Vector3(70.472, 1, 74.7979)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=344601339]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0075302124, -0.62389135, 0.057385206)
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_g5c48")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=1694471486]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, -5.2031054, 0)
+visible = false
+mesh = SubResource("BoxMesh_eqmd6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1826797231]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0014648438)
+visible = false
+shape = SubResource("BoxShape3D_fwu20")
+
+[node name="Player" type="CharacterBody3D" parent="." unique_id=1063721254]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.96425474, 7)
+script = ExtResource("1_e13mc")
+SPEED = 7.0
+
+[node name="Head" type="Node3D" parent="Player" unique_id=1209381911]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5040767, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Player/Head" unique_id=1047623771]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.048889637, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player" unique_id=1709036758]
+shape = SubResource("CapsuleShape3D_xcj4c")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player" unique_id=361959234]
+mesh = SubResource("CapsuleMesh_h0f5h")
+
+[node name="Stamina" type="Node" parent="Player" unique_id=1526982074]
+script = ExtResource("2_q0huo")
+
+[node name="blocks" type="Node" parent="." unique_id=571464655]
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="blocks" unique_id=1291975549]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2812357, 1.631241, 0)
+use_collision = true
+radius = 0.89453125
+height = 3.3530273
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="blocks" unique_id=2044743916]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5624714, 1.2624819, -26.502935)
+use_collision = true
+radius = 0.89453125
+height = 3.3530273
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="blocks" unique_id=41732979]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15629292, 0.8937229, 22.99413)
+use_collision = true
+radius = 0.89453125
+height = 3.3530273
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="blocks/CSGCylinder3D3" unique_id=988750888]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.281235, 0.63124096, -23)
+use_collision = true
+radius = 0.89453125
+height = 3.3530273
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="blocks/CSGCylinder3D3" unique_id=453292326]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.56247, 0.2624818, -49.502937)
+use_collision = true
+radius = 0.89453125
+height = 3.3530273
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="blocks/CSGCylinder3D3" unique_id=1681548697]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.843708, 0.8937229, -0.005870819)
+use_collision = true
+radius = 0.89453125
+height = 3.3530273
+
+[node name="CSGCylinder3D4" type="CSGCylinder3D" parent="blocks" unique_id=848994027]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.156292, 1.893723, 0.4970646)
+use_collision = true
+radius = 0.89453125
+height = 3.3530273
+
+[node name="CSGCylinder3D5" type="CSGCylinder3D" parent="blocks" unique_id=1376779196]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.875057, 1.5249639, -26.00587)
+use_collision = true
+radius = 0.89453125
+height = 3.3530273
+
+[node name="CSGCylinder3D6" type="CSGCylinder3D" parent="blocks" unique_id=1773625060]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.593822, 1.1562047, 23.491194)
+use_collision = true
+radius = 0.89453125
+height = 3.3530273
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2088752914]
+transform = Transform3D(0.99904823, 0.033267125, -0.028212573, 0, 0.6467898, 0.7626684, 0.043619387, -0.7619425, 0.6461742, 0, 5, 0)
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=80772396]
+script = ExtResource("3_oirxf")
+
+[node name="Control" type="Control" parent="UI" unique_id=2046272908]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="StaminaBar" type="TextureProgressBar" parent="UI/Control" unique_id=749231967]
+modulate = Color(0.972549, 0.8039216, 0.08235294, 1)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 49.0
+offset_top = 462.0
+offset_right = 328.0
+offset_bottom = 489.0
+grow_vertical = 0
+nine_patch_stretch = true
+texture_progress = SubResource("CanvasTexture_eqmd6")
