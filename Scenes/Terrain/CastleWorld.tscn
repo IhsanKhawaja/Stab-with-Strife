@@ -2,7 +2,24 @@
 
 [ext_resource type="Script" uid="uid://yfg1e2klklcl" path="res://Scripts/Terrain/castle_world.gd" id="1_hwwkj"]
 [ext_resource type="PackedScene" uid="uid://ckktscuw4kaju" path="res://Scenes/Terrain/CRoom.tscn" id="2_sw00d"]
+[ext_resource type="PackedScene" uid="uid://dhk3vgk7sjvwa" path="res://Scenes/Testing/camera_controller.tscn" id="3_b1m0e"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_s8gxv"]
+
+[sub_resource type="Environment" id="Environment_b1m0e"]
 
 [node name="World" type="Node3D" unique_id=2039810402]
 script = ExtResource("1_hwwkj")
 room = ExtResource("2_sw00d")
+
+[node name="CameraController" parent="." unique_id=560652925 instance=ExtResource("3_b1m0e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3225888, 1.1047794)
+
+[node name="TEST-Floor" type="MeshInstance3D" parent="." unique_id=1013981181]
+mesh = SubResource("PlaneMesh_s8gxv")
+
+[node name="World" type="WorldEnvironment" parent="." unique_id=2068829943]
+environment = SubResource("Environment_b1m0e")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1701874877]
+transform = Transform3D(0.87605345, 0.31556293, -0.36462364, 0, 0.7561449, 0.65440434, 0.482214, -0.5732932, 0.6624233, 0, 1.4614925, 1.2201593)
