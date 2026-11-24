@@ -1,8 +1,10 @@
 [gd_scene format=3 uid="uid://djxhvfawymqq6"]
 
-[ext_resource type="Script" uid="uid://0rf3vjsunv78" path="res://Scripts/character_movement.gd" id="1_e13mc"]
-[ext_resource type="Script" uid="uid://hp8l131sn1vg" path="res://Scripts/stamina.gd" id="2_q0huo"]
-[ext_resource type="Script" uid="uid://b0okhahyrdsd" path="res://Scripts/ui.gd" id="3_oirxf"]
+[ext_resource type="Script" uid="uid://0rf3vjsunv78" path="res://Scripts/character_movement.gd" id="1_3ukn2"]
+[ext_resource type="Script" uid="uid://hp8l131sn1vg" path="res://Scripts/stamina.gd" id="2_am7v3"]
+[ext_resource type="Script" uid="uid://ub8h3k4hdi0u" path="res://Scripts/health_(and_death_check).gd" id="3_inftb"]
+[ext_resource type="Script" uid="uid://b0okhahyrdsd" path="res://Scripts/ui.gd" id="4_xbrlv"]
+[ext_resource type="Script" uid="uid://cupm2w04wutpc" path="res://Scripts/void_aka_kill_brick.gd" id="5_2jxso"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_g5c48"]
 
@@ -16,6 +18,11 @@ size = Vector3(1, 1, 0.9970703)
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_h0f5h"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_eqmd6"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_iw3lg"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3ukn2"]
+size = Vector3(18.336945, 1, 16.220947)
 
 [node name="Node3D" type="Node3D" unique_id=566379481]
 
@@ -40,8 +47,8 @@ visible = false
 shape = SubResource("BoxShape3D_fwu20")
 
 [node name="Player" type="CharacterBody3D" parent="." unique_id=1063721254]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.96425474, 7)
-script = ExtResource("1_e13mc")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.96425474, -0.039589882)
+script = ExtResource("1_3ukn2")
 SPEED = 7.0
 
 [node name="Head" type="Node3D" parent="Player" unique_id=1209381911]
@@ -57,15 +64,14 @@ shape = SubResource("CapsuleShape3D_xcj4c")
 mesh = SubResource("CapsuleMesh_h0f5h")
 
 [node name="Stamina" type="Node" parent="Player" unique_id=1526982074]
-script = ExtResource("2_q0huo")
+script = ExtResource("2_am7v3")
+
+[node name="Health (and death)" type="Node" parent="Player" unique_id=1631929420 node_paths=PackedStringArray("player")]
+script = ExtResource("3_inftb")
+respawn_position = Vector3(0, 5, 0)
+player = NodePath("..")
 
 [node name="blocks" type="Node" parent="." unique_id=571464655]
-
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="blocks" unique_id=1291975549]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2812357, 1.631241, 0)
-use_collision = true
-radius = 0.89453125
-height = 3.3530273
 
 [node name="CSGCylinder3D2" type="CSGCylinder3D" parent="blocks" unique_id=2044743916]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5624714, 1.2624819, -26.502935)
@@ -119,7 +125,7 @@ height = 3.3530273
 transform = Transform3D(0.99904823, 0.033267125, -0.028212573, 0, 0.6467898, 0.7626684, 0.043619387, -0.7619425, 0.6461742, 0, 5, 0)
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=80772396]
-script = ExtResource("3_oirxf")
+script = ExtResource("4_xbrlv")
 
 [node name="Control" type="Control" parent="UI" unique_id=2046272908]
 layout_mode = 3
@@ -141,5 +147,28 @@ grow_vertical = 0
 nine_patch_stretch = true
 texture_progress = SubResource("CanvasTexture_eqmd6")
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="." unique_id=198949163]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 42)
+[node name="HealthBar" type="TextureProgressBar" parent="UI/Control" unique_id=1624644957]
+modulate = Color(2.5990605e-06, 0.6741757, 0.30344942, 1)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 51.0
+offset_top = 425.0
+offset_right = 321.0
+offset_bottom = 450.0
+grow_vertical = 2
+nine_patch_stretch = true
+texture_progress = SubResource("CanvasTexture_iw3lg")
+
+[node name="Void aka kill brick" type="Node3D" parent="." unique_id=1326590170]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -20.863277, 0)
+
+[node name="Area3D" type="Area3D" parent="Void aka kill brick" unique_id=2037415067]
+collision_layer = 2
+script = ExtResource("5_2jxso")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Void aka kill brick/Area3D" unique_id=2085234000]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -0.033111572, -2.5011425, -1.1853027)
+shape = SubResource("BoxShape3D_3ukn2")
+debug_color = Color(0.9719139, 0.119049974, 0.30940065, 0.41960785)

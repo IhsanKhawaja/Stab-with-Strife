@@ -21,8 +21,9 @@ var dash_direction := Vector3.ZERO
 @export var max_look_angle: float = 89.0 # Prevents breaking your neck looking too far up/down
 
 @onready var head: Node3D = $Head
-
+	
 func _ready() -> void:
+	add_to_group("player")
 	# Lock the mouse to the center of the screen
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
@@ -109,8 +110,8 @@ func _physics_process(delta: float) -> void:
 		if dash_timer <= 0.0:
 			is_dashing = false
 			# optional: kill leftover horizontal momentum after dash
-			velocity.x = 0.0
-			velocity.z = 0.0
+			#velocity.x = 0.0
+			#velocity.z = 0.0
 	else:
 		# Normal movement ONLY when not dashing
 		var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_backwards")
