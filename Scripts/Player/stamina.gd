@@ -42,3 +42,8 @@ func try_spend(cost: float) -> bool:
 func restore(amount: float) -> void:
 	current_stamina = min(max_stamina, current_stamina + amount)
 	emit_signal("changed", current_stamina, max_stamina)
+
+func reset() -> void:
+	_regen_cooldown = 0.0
+	current_stamina = max_stamina
+	emit_signal("changed", current_stamina, max_stamina)
